@@ -1,0 +1,7 @@
+input symbols:
+stack symbols:
+states: 1
+initial state:
+initial stack symbol: Z
+
+transitions:

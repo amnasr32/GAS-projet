@@ -1,0 +1,52 @@
+Projet réalisé par Amira NASR  et Khalida SMAINI
+
+
+***************Phase 1 ****************: 
+
+Permet de vérifier si un mot est accepté par l'automate tout en gérant les erreurs qui puissent avoir lieu
+
+Se palcer dans le repertoire Phase1: 
+
+Pour compiler : 
+    make
+Pour supprimer les fichiers de compilation:
+    make clean
+
+Run le programme : 
+     compiler 
+    ./parser -run exemples_phase1+2/palindrome "mot"
+
+mot accepté : aacaa
+pas de transitions: aacbb
+pile non vide entrée epuisés : abc 
+pile vide entrée non epuisée cccbccc
+
+
+***************Phase 2 ****************: 
+Permet d'afficher l'automate, vérifier sa bonne formation et dire si elle est deterministe
+
+
+Se palcer dans le repertoire Phase2:
+
+Pour compiler : 
+    make
+Pour supprimer les fichiers de compilation:
+    make clean
+
+Run le programme : 
+    compiler 
+    faire ./parser  < "dossier/fichier"  
+
+***************Phase 3 ****************:
+Partie non terminée
+
+*************** Parties réalisés **********************: 
+Partie 1
+Partie 2
+Partie 3 : seulement lexer & parser & des fonctions d'affichage de l'automate
+
+*************** Répartition du travail ****************: 
+Khalida : Partie 1 & 3
+Amira :   Partie 2 & 3
+
+

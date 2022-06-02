@@ -1,0 +1,210 @@
+State 0:
+input' -> . input [ # ]
+-- On INPUTSYMBOLS shift to state 1
+-- On inputsymbols shift to state 6
+-- On input shift to state 19
+-- On declaration shift to state 20
+-- On automate shift to state 42
+
+State 1:
+inputsymbols -> INPUTSYMBOLS . suite_lettres_nonvide [ STACKSYMBOLS ]
+-- On LETTRE shift to state 2
+-- On suite_lettres_nonvide shift to state 5
+
+State 2:
+suite_lettres_nonvide -> LETTRE . [ STATES STACKSYMBOLS INITIALSTATE ]
+suite_lettres_nonvide -> LETTRE . VIRGULE suite_lettres_nonvide [ STATES STACKSYMBOLS INITIALSTATE ]
+-- On VIRGULE shift to state 3
+-- On STATES reduce production suite_lettres_nonvide -> LETTRE 
+-- On STACKSYMBOLS reduce production suite_lettres_nonvide -> LETTRE 
+-- On INITIALSTATE reduce production suite_lettres_nonvide -> LETTRE 
+
+State 3:
+suite_lettres_nonvide -> LETTRE VIRGULE . suite_lettres_nonvide [ STATES STACKSYMBOLS INITIALSTATE ]
+-- On LETTRE shift to state 2
+-- On suite_lettres_nonvide shift to state 4
+
+State 4:
+suite_lettres_nonvide -> LETTRE VIRGULE suite_lettres_nonvide . [ STATES STACKSYMBOLS INITIALSTATE ]
+-- On STATES reduce production suite_lettres_nonvide -> LETTRE VIRGULE suite_lettres_nonvide 
+-- On STACKSYMBOLS reduce production suite_lettres_nonvide -> LETTRE VIRGULE suite_lettres_nonvide 
+-- On INITIALSTATE reduce production suite_lettres_nonvide -> LETTRE VIRGULE suite_lettres_nonvide 
+
+State 5:
+inputsymbols -> INPUTSYMBOLS suite_lettres_nonvide . [ STACKSYMBOLS ]
+-- On STACKSYMBOLS reduce production inputsymbols -> INPUTSYMBOLS suite_lettres_nonvide 
+
+State 6:
+declaration -> inputsymbols . stacksymbols states initialstate initialstack [ TRANSITIONS ]
+-- On STACKSYMBOLS shift to state 7
+-- On stacksymbols shift to state 9
+
+State 7:
+stacksymbols -> STACKSYMBOLS . suite_lettres_nonvide [ STATES ]
+-- On LETTRE shift to state 2
+-- On suite_lettres_nonvide shift to state 8
+
+State 8:
+stacksymbols -> STACKSYMBOLS suite_lettres_nonvide . [ STATES ]
+-- On STATES reduce production stacksymbols -> STACKSYMBOLS suite_lettres_nonvide 
+
+State 9:
+declaration -> inputsymbols stacksymbols . states initialstate initialstack [ TRANSITIONS ]
+-- On STATES shift to state 10
+-- On states shift to state 12
+
+State 10:
+states -> STATES . suite_lettres_nonvide [ INITIALSTATE ]
+-- On LETTRE shift to state 2
+-- On suite_lettres_nonvide shift to state 11
+
+State 11:
+states -> STATES suite_lettres_nonvide . [ INITIALSTATE ]
+-- On INITIALSTATE reduce production states -> STATES suite_lettres_nonvide 
+
+State 12:
+declaration -> inputsymbols stacksymbols states . initialstate initialstack [ TRANSITIONS ]
+-- On INITIALSTATE shift to state 13
+-- On initialstate shift to state 15
+
+State 13:
+initialstate -> INITIALSTATE . LETTRE [ INITIALSTACKSYMBOL ]
+-- On LETTRE shift to state 14
+
+State 14:
+initialstate -> INITIALSTATE LETTRE . [ INITIALSTACKSYMBOL ]
+-- On INITIALSTACKSYMBOL reduce production initialstate -> INITIALSTATE LETTRE 
+
+State 15:
+declaration -> inputsymbols stacksymbols states initialstate . initialstack [ TRANSITIONS ]
+-- On INITIALSTACKSYMBOL shift to state 16
+-- On initialstack shift to state 18
+
+State 16:
+initialstack -> INITIALSTACKSYMBOL . LETTRE [ TRANSITIONS ]
+-- On LETTRE shift to state 17
+
+State 17:
+initialstack -> INITIALSTACKSYMBOL LETTRE . [ TRANSITIONS ]
+-- On TRANSITIONS reduce production initialstack -> INITIALSTACKSYMBOL LETTRE 
+
+State 18:
+declaration -> inputsymbols stacksymbols states initialstate initialstack . [ TRANSITIONS ]
+-- On TRANSITIONS reduce production declaration -> inputsymbols stacksymbols states initialstate initialstack 
+
+State 19:
+input' -> input . [ # ]
+-- On # accept input
+
+State 20:
+automate -> declaration . transitions [ EOF ]
+-- On TRANSITIONS shift to state 21
+-- On transitions shift to state 41
+
+State 21:
+transitions -> TRANSITIONS . translist [ EOF ]
+-- On LPAREN shift to state 22
+-- On translist shift to state 38
+-- On transition shift to state 39
+-- On EOF reduce production translist -> 
+
+State 22:
+transition -> LPAREN . LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On LETTRE shift to state 23
+
+State 23:
+transition -> LPAREN LETTRE . VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On VIRGULE shift to state 24
+
+State 24:
+transition -> LPAREN LETTRE VIRGULE . lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On LETTRE shift to state 25
+-- On lettre_ou_vide shift to state 26
+-- On VIRGULE reduce production lettre_ou_vide -> 
+
+State 25:
+lettre_ou_vide -> LETTRE . [ VIRGULE ]
+-- On VIRGULE reduce production lettre_ou_vide -> LETTRE 
+
+State 26:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide . VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On VIRGULE shift to state 27
+
+State 27:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE . LETTRE VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On LETTRE shift to state 28
+
+State 28:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE . VIRGULE LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On VIRGULE shift to state 29
+
+State 29:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE . LETTRE VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On LETTRE shift to state 30
+
+State 30:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE . VIRGULE stack RPAREN [ LPAREN EOF ]
+-- On VIRGULE shift to state 31
+
+State 31:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE . stack RPAREN [ LPAREN EOF ]
+-- On LETTRE shift to state 32
+-- On stack shift to state 35
+-- On nonemptystack shift to state 37
+-- On RPAREN reduce production stack -> 
+
+State 32:
+nonemptystack -> LETTRE . [ RPAREN ]
+nonemptystack -> LETTRE . PTVIRGULE nonemptystack [ RPAREN ]
+-- On PTVIRGULE shift to state 33
+-- On RPAREN reduce production nonemptystack -> LETTRE 
+
+State 33:
+nonemptystack -> LETTRE PTVIRGULE . nonemptystack [ RPAREN ]
+-- On LETTRE shift to state 32
+-- On nonemptystack shift to state 34
+
+State 34:
+nonemptystack -> LETTRE PTVIRGULE nonemptystack . [ RPAREN ]
+-- On RPAREN reduce production nonemptystack -> LETTRE PTVIRGULE nonemptystack 
+
+State 35:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack . RPAREN [ LPAREN EOF ]
+-- On RPAREN shift to state 36
+
+State 36:
+transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN . [ LPAREN EOF ]
+-- On LPAREN reduce production transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN 
+-- On EOF reduce production transition -> LPAREN LETTRE VIRGULE lettre_ou_vide VIRGULE LETTRE VIRGULE LETTRE VIRGULE stack RPAREN 
+
+State 37:
+stack -> nonemptystack . [ RPAREN ]
+-- On RPAREN reduce production stack -> nonemptystack 
+
+State 38:
+transitions -> TRANSITIONS translist . [ EOF ]
+-- On EOF reduce production transitions -> TRANSITIONS translist 
+
+State 39:
+translist -> transition . translist [ EOF ]
+-- On LPAREN shift to state 22
+-- On translist shift to state 40
+-- On transition shift to state 39
+-- On EOF reduce production translist -> 
+
+State 40:
+translist -> transition translist . [ EOF ]
+-- On EOF reduce production translist -> transition translist 
+
+State 41:
+automate -> declaration transitions . [ EOF ]
+-- On EOF reduce production automate -> declaration transitions 
+
+State 42:
+input -> automate . EOF [ # ]
+-- On EOF shift to state 43
+
+State 43:
+input -> automate EOF . [ # ]
+-- On # reduce production input -> automate EOF 
+
